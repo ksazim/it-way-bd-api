@@ -12,12 +12,15 @@ return new class extends Migration
             $table->id();
             $table->text('note');
             $table->morphs('noteable');
+            $table->softDeletes();
             $table->timestamps();
         });
     }
     
     public function down(): void
     {
-        Schema::dropIfExists('notes');
+        Schema::table('notes', function (Blueprint $table) {
+            $table->dropSoftDeletes();
+        });
     }
 };

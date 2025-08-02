@@ -19,14 +19,16 @@ return new class extends Migration
                 ->cascadeOnDelete()
                 ->cascadeOnUpdate();
             $table->integer('quantity');
-            $table->float('discount');
             $table->float('sub_total');
+            $table->softDeletes();
             $table->timestamps();
         });
     }
 
     public function down(): void
     {
-        Schema::dropIfExists('sales_items');
+        Schema::table('sales_items', function (Blueprint $table) {
+            $table->dropSoftDeletes();
+        });
     }
 };

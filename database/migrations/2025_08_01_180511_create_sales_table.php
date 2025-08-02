@@ -14,7 +14,7 @@ return new class extends Migration
                 ->constrained('customers')
                 ->cascadeOnDelete()
                 ->cascadeOnUpdate();
-            $table->float('discount');
+            $table->float('discount')->nullable();
             $table->float('total_amount');
             $table->date('sale_date');
             $table->softDeletes();
